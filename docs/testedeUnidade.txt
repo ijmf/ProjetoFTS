@@ -1,0 +1,13 @@
+
+UI - Visão Front End
+Service
+Unitário - Piramide de Teste Classica --> Se refere a uma visão do Back End. (Unitário) - Responsabilidade do Desenvolvedor.
+
+
+Usar uma massa de Teste --> DDT : Data Driven Test : Teste direcionado por dados.
+TDD: Test Driven Development = Desenvolvimento Direcionado por Testes.
+BDD: Behavior Driven Development = Desenvolvimento Orientado por Comportamento.
+
+
+
+

@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class TesteCalculadora {
 
+    //Teste com valores fixos.
     @Test
     public void testeSomarDoisNumeros() {
 
@@ -27,6 +28,7 @@ public class TesteCalculadora {
         assertEquals(Double.valueOf(resultadoEsperado), Double.valueOf(resultadoAtual));
     }
 
+    //Teste com Lista
     @ParameterizedTest
     @CsvSource(value = {
             "7, 5, 12",
@@ -51,16 +53,15 @@ public class TesteCalculadora {
         assertEquals(Double.valueOf(resultadoEsperado), Double.valueOf(resultadoAtual));
     }
 
+    //Teste com arquivo CSV. Massa de Teste
     @ParameterizedTest
-    @CsvFileSource(resources = "csv/massaSomar.csv")
+    @CsvFileSource(resources = "csv/massaSomar.csv", numLinesToSkip = 1, delimiter = ',')
 
     public void testeSomarDoisNumerosLendoArquivo(String txtNum1, String txtNum2, String resultadoEsperado) {
 
         //Configura
-        // Os dados de entrada vem da lista.
 
         //Valores de saída
-        //double resultadoEsperado = 12;
 
         //Executa
         double resultadoAtual = Calculadora.somarDoisNumeros(Integer.valueOf(txtNum1), Integer.valueOf(txtNum2));
