@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+//import org.junit.jupiter.api.FixMethodOrder;
+//import org.junit.jupiter.api.MethodSorters;
 
 //Classe
 public class TesteUser {
@@ -24,6 +26,7 @@ public class TesteUser {
 
     //Funções de Teste
     @Test
+    // Post
     public void testarIncluirUser() throws IOException {
     // Carregar os dados do nosso Json
         String jsonBody = lerArquivoJson("src/test/resources/json/user1.json");
@@ -42,9 +45,10 @@ public class TesteUser {
                 .body("type", is("unknown"))              // tag type é 137743327751
                 .body("message", is(userID))                    // Message é o userId
         ;
-    }//Fim do Post
+    }
 
     @Test
+    //Get
     public void testarConsultarUser(){
 
         String username = "IvanFerreira";
@@ -69,6 +73,50 @@ public class TesteUser {
                 .body("phone", is(phone))                    // Message é o userId
         ;
     }
+
+    @Test
+    //Put
+    public void testarAtualizarUser() throws IOException {
+
+        String jsonBody = lerArquivoJson("src/test/resources/json/user2.json");
+        String userID = "137743327751";
+        String username = "IvanFerreira";
+
+        given()
+                .contentType(ct)               // Tipo de Conteúdo
+                .body(jsonBody)                                  // Corpo da requisição
+                .log().all()                                     // Mostre tudo na requisição
+        .when()
+                .put(uriUser + username)                      // Endpoint para atualizar o usuário
+        .then()
+                .log().all()                                     // Mostre tudo na resposta
+                .statusCode(200)                               // Verifique se o status é 200 OK
+                .body("code", is(200))                    // tag code é 200
+                .body("type", is("unknown"))              // tag type é 137743327751
+                .body("message", is(userID))                    // Message é o userId
+        ;
+    }
+
+    @Test
+    //Delete
+    public void testarExcluirUser() throws IOException {
+
+        String username = "IvanFerreira";
+
+        given()
+                .contentType(ct)               // Tipo de Conteúdo
+                .log().all()                                     // Mostre tudo na requisição
+        .when()
+                .delete(uriUser + username)                      // Endpoint para atualizar o usuário
+        .then()
+                .log().all()                                     // Mostre tudo na resposta
+                .statusCode(200)                               // Verifique se o status é 200 OK
+                .body("code", is(200))                    // tag code é 200
+                .body("type", is("unknown"))              // tag type é 137743327751
+                .body("message", is(username))                    // Message é o userId
+        ;
+    }
+
 
 }
 
