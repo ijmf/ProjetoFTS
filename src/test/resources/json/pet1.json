@@ -1,0 +1,18 @@
+{
+  "id": 987654321,
+  "category": {
+    "id": 12,
+    "name": "Duque"
+  },
+  "name": "Dachshund",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 12,
+      "name": "Pequeno porte"
+    }
+  ],
+  "status": "available"
+}
