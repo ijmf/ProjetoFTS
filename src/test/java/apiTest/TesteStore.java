@@ -73,44 +73,22 @@ public class TesteStore {
     }
 
     @Test
-    //Put
-    public void testarAtualizarPet() throws IOException {
-
-        String jsonBody = lerArquivoJson("src/test/resources/json/pet2.json");
-
-        given()
-                .contentType(ct)               // Tipo de Conteúdo
-                .body(jsonBody)                                  // Corpo da requisição
-                .log().all()                                     // Mostre tudo na requisição
-        .when()
-                .put(uriStore)                      // Endpoint para atualizar o usuário
-        .then()
-                .log().all()                                     // Mostre tudo na resposta
-                .statusCode(200)                               // Verifique se o status é 200 OK
-                .body("id", is(987654321))                    // tag code é 200
-                .body("category.id", is(12))              // tag type é 137743327751
-                .body("name", is("Dachshund"))                    // Message é o userId
-                .body("status", is("available"))                    // Message é o userId
-        ;
-    }
-
-    @Test
     //Delete
-    public void testarExcluirPet() throws IOException {
+    public void testarExcluirStore() throws IOException {
 
-        String petID = "987654321";
+        String orderID = "3";
 
         given()
                 .contentType(ct)               // Tipo de Conteúdo
                 .log().all()                                     // Mostre tudo na requisição
         .when()
-                .delete(uriStore + petID)                      // Endpoint para atualizar o usuário
+                .delete(uriStore + orderID)                      // Endpoint para atualizar o usuário
         .then()
                 .log().all()                                     // Mostre tudo na resposta
                 .statusCode(200)                               // Verifique se o status é 200 OK
                 .body("code", is(200))                    // tag code é 200
                 .body("type", is("unknown"))              // tag type é 137743327751
-                .body("message", is(petID))                    // Message é o petId
+                .body("message", is(orderID))                    // Message é o petId
         ;
     }
 
