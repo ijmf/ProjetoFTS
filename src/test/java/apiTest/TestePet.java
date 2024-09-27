@@ -98,21 +98,21 @@ public class TestePet {
 
     @Test
     //Delete
-    public void testarExcluirUser() throws IOException {
+    public void testarExcluirPet() throws IOException {
 
-        String username = "IvanFerreira";
+        String petID = "987654321";
 
         given()
                 .contentType(ct)               // Tipo de Conteúdo
                 .log().all()                                     // Mostre tudo na requisição
         .when()
-                .delete(uriPet)                      // Endpoint para atualizar o usuário
+                .delete(uriPet + petID)                      // Endpoint para atualizar o usuário
         .then()
                 .log().all()                                     // Mostre tudo na resposta
                 .statusCode(200)                               // Verifique se o status é 200 OK
                 .body("code", is(200))                    // tag code é 200
                 .body("type", is("unknown"))              // tag type é 137743327751
-                .body("message", is(username))                    // Message é o userId
+                .body("message", is(petID))                    // Message é o petId
         ;
     }
 
