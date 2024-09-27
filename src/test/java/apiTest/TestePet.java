@@ -53,28 +53,24 @@ public class TestePet {
 
     @Test
     //Get
-    public void testarConsultarUser(){
+    public void testarConsultarPet(){
 
-        String username = "IvanFerreira";
+        String petID = "987654321";
 
         //Resultados Esperados
-        long userID = 137743327751L;                                  //Código do Usuário
-        String email = "ivanjuniomf@gmail.com";
-        String password = "123";
-        String phone = "6155779900";
 
         given()
                 .contentType(ct)                                               // o Tipo de Conteúdo
                 .log().all()                                                   // Mostre tud
         .when()                                                                // Quando
-                .get(uriPet)                                   // Endpoint // Onde
+                .get(uriPet + petID)                                   // Endpoint // Onde
         .then()                                                                // Então
                 .log().all()                                       // mostre tudo na volta
                 .statusCode(200)                                //  Comunicação ida e volta - OK
-                .body("id", is(userID))                    // tag code é 200
-                .body("email", is(email))              // tag type é 137743327751
-                .body("password", is(password))                    // Message é o userId
-                .body("phone", is(phone))                    // Message é o userId
+                .body("id", is(987654321))                    // tag code é 200
+                .body("category.id", is(12))              // tag type é 137743327751
+                .body("name", is("Dachshund"))                    // Message é o userId
+                .body("status", is("available"))                    // Message é o userId
         ;
     }
 
