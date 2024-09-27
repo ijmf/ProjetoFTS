@@ -76,11 +76,9 @@ public class TestePet {
 
     @Test
     //Put
-    public void testarAtualizarUser() throws IOException {
+    public void testarAtualizarPet() throws IOException {
 
-        String jsonBody = lerArquivoJson("src/test/resources/json/user2.json");
-        String userID = "137743327751";
-        String username = "IvanFerreira";
+        String jsonBody = lerArquivoJson("src/test/resources/json/pet2.json");
 
         given()
                 .contentType(ct)               // Tipo de Conteúdo
@@ -91,9 +89,10 @@ public class TestePet {
         .then()
                 .log().all()                                     // Mostre tudo na resposta
                 .statusCode(200)                               // Verifique se o status é 200 OK
-                .body("code", is(200))                    // tag code é 200
-                .body("type", is("unknown"))              // tag type é 137743327751
-                .body("message", is(userID))                    // Message é o userId
+                .body("id", is(987654321))                    // tag code é 200
+                .body("category.id", is(12))              // tag type é 137743327751
+                .body("name", is("Dachshund"))                    // Message é o userId
+                .body("status", is("available"))                    // Message é o userId
         ;
     }
 
