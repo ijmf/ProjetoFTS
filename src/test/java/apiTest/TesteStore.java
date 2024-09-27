@@ -19,7 +19,7 @@ public class TesteStore {
 
     //Atributos
     String ct = "application/json";
-    String uriPet = "https://petstore.swagger.io/v2/pet/";
+    String uriStore = "https://petstore.swagger.io/v2/store/order/";
 
     //Funções e Metódos
     //Funções de Apoio
@@ -52,9 +52,9 @@ public class TesteStore {
 
     @Test
     //Get
-    public void testarConsultarPet(){
+    public void testarConsultarStore(){
 
-        String petID = "987654321";
+        String orderID = "3";
 
         //Resultados Esperados
 
@@ -62,14 +62,13 @@ public class TesteStore {
                 .contentType(ct)                                               // o Tipo de Conteúdo
                 .log().all()                                                   // Mostre tud
         .when()                                                                // Quando
-                .get(uriPet + petID)                                   // Endpoint // Onde
+                .get(uriStore + orderID)                                   // Endpoint // Onde
         .then()                                                                // Então
                 .log().all()                                       // mostre tudo na volta
                 .statusCode(200)                                //  Comunicação ida e volta - OK
-                .body("id", is(987654321))                    // tag code é 200
-                .body("category.id", is(12))              // tag type é 137743327751
-                .body("name", is("Dachshund"))                    // Message é o userId
-                .body("status", is("available"))                    // Message é o userId
+                .body("id", is(3))                    // tag code é 200
+                .body("petId", is(12))                    // Message é o userId
+                .body("status", is("placed"))                    // Message é o userId
         ;
     }
 
@@ -84,7 +83,7 @@ public class TesteStore {
                 .body(jsonBody)                                  // Corpo da requisição
                 .log().all()                                     // Mostre tudo na requisição
         .when()
-                .put(uriPet)                      // Endpoint para atualizar o usuário
+                .put(uriStore)                      // Endpoint para atualizar o usuário
         .then()
                 .log().all()                                     // Mostre tudo na resposta
                 .statusCode(200)                               // Verifique se o status é 200 OK
@@ -105,7 +104,7 @@ public class TesteStore {
                 .contentType(ct)               // Tipo de Conteúdo
                 .log().all()                                     // Mostre tudo na requisição
         .when()
-                .delete(uriPet + petID)                      // Endpoint para atualizar o usuário
+                .delete(uriStore + petID)                      // Endpoint para atualizar o usuário
         .then()
                 .log().all()                                     // Mostre tudo na resposta
                 .statusCode(200)                               // Verifique se o status é 200 OK
