@@ -2,12 +2,13 @@
 package apiTest;
 
 //Bibliotecas
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 //import org.junit.jupiter.api.FixMethodOrder;
 //import org.junit.jupiter.api.MethodSorters;
 
@@ -115,6 +116,31 @@ public class TesteUser {
                 .body("type", is("unknown"))              // tag type é 137743327751
                 .body("message", is(username))                    // Message é o userId
         ;
+    }
+
+    @Test
+    //GET - LOGIN
+    public void testarLogin(){
+
+        String username = "IvanFerreira";
+        String password = "123";
+
+        Response response = (Response) given()
+                .contentType(ct)
+                .log().all()
+        .when()
+                .get(uriUser + "login?username="+ username +"&password=" + password)
+        .then()
+                .statusCode(200)
+                .log().all()
+                .body("code", is(200))
+                .body("type", is("unknown"))
+                .body("message", containsString("logged in user session:"))
+                .body("message", hasLength(36))
+        .extract();
+                //Extração do token da resposta
+                String token = response.jsonPath().getString("message").substring(23);
+                System.out.println("Conteúdo do Token: "+ token);
     }
 
 
