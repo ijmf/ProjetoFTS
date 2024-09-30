@@ -4,6 +4,9 @@ package apiTest;
 //Bibliotecas
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -143,6 +146,44 @@ public class TesteUser {
                 System.out.println("Conteúdo do Token: "+ token);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/csv/massaUser.csv", numLinesToSkip = 1, delimiter = ',')
+    public void testarIncluirUserCSV(
+            String id,
+            String username,
+            String firstName,
+            String lastName,
+            String email,
+            String password,
+            String phone,
+            String userStatus)
+    {
+        // Incluir dados no CSV
+        StringBuilder jsonBody = new StringBuilder("{");
+        jsonBody.append("\"id\": " + id + ",");
+        jsonBody.append("\"username\": \"" + username + "\",");
+        jsonBody.append("\"firstName\": \"" + firstName + "\",");
+        jsonBody.append("\"lastName\": \"" + lastName + "\",");
+        jsonBody.append("\"email\": \"" + email + "\",");
+        jsonBody.append("\"password\": \"" + password + "\",");
+        jsonBody.append("\"phone\": \"" + phone + "\",");
+        jsonBody.append("\"userStatus\": " + userStatus);
+        jsonBody.append("}"); // Remover vírgula extra aqui
+
+        // Realizar o Teste
+        given()                                                      // Dado que
+                .contentType("application/json")                  // o Tipo de Conteúdo
+                .log().all()                                        // Mostre tudo
+                .body(jsonBody.toString())                          // Corpo da requisição
+        .when()                                                     // Quando
+                .post("https://petstore.swagger.io/v2/user")     // Endpoint // Onde
+        .then()                                                     // Então
+                .log().all()                                        // mostre tudo na volta
+                .statusCode(200)                                 // Comunicação ida e volta - OK
+                .body("code", is(200))                     // tag code é 200
+                .body("type", is("unknown"))               // tag type é "unknown"
+                .body("message", is(id));                         // Message é o userId
+    }
 
 }
 

@@ -1,0 +1,11 @@
+id,username,firstName,lastName,email,password,phone,userStatus
+137743327751,IvanFerreira,Ivan,Ferreira,ivanjuniomf@gmail.com,123,6155779900,0
+137743327752,JuliaSilva,Julia,Silva,juliasilva@gmail.com,abc,6198765432,1
+137743327753,PedroSantos,Pedro,Santos,pedrosantos@gmail.com,pass123,6192345678,0
+137743327754,AnaLima,Ana,Lima,analima@gmail.com,senha456,6187654321,1
+137743327755,CarlosMoraes,Carlos,Moraes,carlosm@gmail.com,7890,6176543210,0
+137743327756,MariaCosta,Maria,Costa,mariacosta@gmail.com,qwerty,6165432109,1
+137743327757,RenatoPereira,Renato,Pereira,renatopereira@gmail.com,abcd1234,6154321098,0
+137743327758,LaraRibeiro,Lara,Ribeiro,lararibeiro@gmail.com,5678,6143210987,1
+137743327759,FelipeAlmeida,Felipe,Almeida,felipealmeida@gmail.com,password,6132109876,0
+137743327760,TaisRocha,Tais,Rocha,taisrocha@gmail.com,secret,6121098765,1
