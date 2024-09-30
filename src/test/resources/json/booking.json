@@ -1,0 +1,11 @@
+{
+  "firstname": "Thor",
+  "lastname": "Odin",
+  "totalprice": 500,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2025-01-02",
+    "checkout": "2025-01-30"
+  },
+  "additionalneeds": "Breakfast"
+}

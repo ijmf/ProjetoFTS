@@ -49,6 +49,7 @@ public class TesteBooking {
         token = resp.jsonPath().getString(("token"));
         System.out.println("Token: " + token);
     }
+
     @Test
     @Order(2)
     public void testeBookingIds() throws IOException {
@@ -66,6 +67,34 @@ public class TesteBooking {
 
     @Test
     @Order(3)
+    public void testeCreateBooking() throws IOException {
+        String jsonBody = lerArquivoJson("src/test/resources/json/booking.json");
+
+        Response resp = given()
+                .log().all()
+                .contentType(ct)
+                .body(jsonBody)
+                .when()
+                .post(uri + "booking")
+                .then()
+                .log().all()
+                .statusCode(200)
+                .body("booking.firstname", is("Thor"))
+                .body("booking.lastname", is("Odin"))
+                .extract().response(); // Extraindo a resposta inteira aqui
+
+        // Acesse o bookingId de forma correta
+        bookingId = resp.jsonPath().getInt("bookingid"); // Verifique se "bookingid" está correto
+
+        if (bookingId == 0) {
+            System.out.println("bookingId não encontrado.");
+        } else {
+            System.out.println("bookingID: " + bookingId);
+        }
+    }
+
+    @Test
+    @Order(4)
     public void testeGetBooking() throws IOException {
         testeCreateToken();
         given()
@@ -76,7 +105,7 @@ public class TesteBooking {
         .then()
                 .log().all()
                 .statusCode(200)
-                .body("totalprice", is(112))
+                .body("totalprice", is(500))
                 //.body("bookingdates.checkin", is("2018-01-01"))
         ;
     }
@@ -102,8 +131,43 @@ public class TesteBooking {
                 .body("bookingdates.checkin", is("2024-09-30"))
                 .body("bookingdates.checkout", is("2024-10-30"))
                 .extract();
+    }
 
+    @Test
+    @Order(6)
+    public void testePartialUpdateBooking() throws IOException {
+        String jsonBody = lerArquivoJson("src/test/resources/json/patchBooking.json");
 
+        given()
+                .contentType(ct)
+                .log().all()
+                .header("Cookie", "token=" + token)
+                .body(jsonBody)
+        .when()
+                .patch(uri + "booking/" + bookingId)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("totalprice", is(300))
+                .body("additionalneeds", is("Dinner"))
+                .body("bookingdates.checkout", is("2025-02-01"))
+        ;
+    }
 
+    @Test
+    @Order(7)
+    public void testeDeleteBooking() {
+
+        given()
+                .contentType(ct)
+                .log().all()
+                .header("Cookie", "token=" + token)
+                .when()
+                .delete(uri + "booking/" + bookingId)
+                .then()
+                .log().all()
+                .statusCode(201)
+                .body(is("Created"))
+        ;
     }
 }
