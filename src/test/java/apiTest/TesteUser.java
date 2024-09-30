@@ -168,7 +168,7 @@ public class TesteUser {
         jsonBody.append("\"password\": \"" + password + "\",");
         jsonBody.append("\"phone\": \"" + phone + "\",");
         jsonBody.append("\"userStatus\": " + userStatus);
-        jsonBody.append("}"); // Remover vírgula extra aqui
+        jsonBody.append("}");
 
         // Realizar o Teste
         given()                                                      // Dado que
@@ -182,7 +182,7 @@ public class TesteUser {
                 .statusCode(200)                                 // Comunicação ida e volta - OK
                 .body("code", is(200))                     // tag code é 200
                 .body("type", is("unknown"))               // tag type é "unknown"
-                .body("message", is(id));                         // Message é o userId
+                .body("message", is(id));                         // Message é o Id
     }
 
 }
