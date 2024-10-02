@@ -2,8 +2,12 @@
 package apiTest;
 
 //Bibliotecas
+import com.google.gson.Gson;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -16,6 +20,7 @@ import static org.hamcrest.Matchers.*;
 //import org.junit.jupiter.api.MethodSorters;
 
 //Classe
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TesteUser {
 
     //Atributos
@@ -30,6 +35,7 @@ public class TesteUser {
 
     //Funções de Teste
     @Test
+    @Order(1)
     // Post
     public void testarIncluirUser() throws IOException {
     // Carregar os dados do nosso Json
@@ -52,6 +58,7 @@ public class TesteUser {
     }
 
     @Test
+    @Order(2)
     //Get
     public void testarConsultarUser(){
 
@@ -69,16 +76,17 @@ public class TesteUser {
         .when()                                                                // Quando
                 .get(uriUser + username)                                   // Endpoint // Onde
         .then()                                                                // Então
-                .log().all()                                       // mostre tudo na volta
-                .statusCode(200)                                //  Comunicação ida e volta - OK
-                .body("id", is(userID))                    // tag code é 200
-                .body("email", is(email))              // tag type é 137743327751
-                .body("password", is(password))                    // Message é o userId
-                .body("phone", is(phone))                    // Message é o userId
+                .log().all()                                                  // mostre tudo na volta
+                .statusCode(200)                                          //  tag deve ser 200
+                .body("id", is(userID))                                  // id é o userID
+                .body("email", is(email))                                // tag type é email
+                .body("password", is(password))                         // Message é o password
+                .body("phone", is(phone))                               // Message é o phone
         ;
     }
 
     @Test
+    @Order(3)
     //Put
     public void testarAtualizarUser() throws IOException {
 
@@ -102,6 +110,7 @@ public class TesteUser {
     }
 
     @Test
+    @Order(4)
     //Delete
     public void testarExcluirUser() throws IOException {
 
@@ -122,6 +131,7 @@ public class TesteUser {
     }
 
     @Test
+    @Order(5)
     //GET - LOGIN
     public void testarLogin(){
 
@@ -147,6 +157,7 @@ public class TesteUser {
     }
 
     @ParameterizedTest
+    @Order(6)
     @CsvFileSource(resources = "/csv/massaUser.csv", numLinesToSkip = 1, delimiter = ',')
     public void testarIncluirUserCSV(
             String id,
@@ -158,7 +169,22 @@ public class TesteUser {
             String phone,
             String userStatus)
     {
+        User user= new User();
+
+        user.id = id;
+        user.username = username;
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.password = password;
+        user.phone = phone;
+        user.userStatus = userStatus;
+
+        Gson gson = new Gson(); //Instancia a classe Gson.
+        String jsonBody = gson.toJson(user);
+
         // Incluir dados no CSV
+        /*
         StringBuilder jsonBody = new StringBuilder("{");
         jsonBody.append("\"id\": " + id + ",");
         jsonBody.append("\"username\": \"" + username + "\",");
@@ -169,7 +195,7 @@ public class TesteUser {
         jsonBody.append("\"phone\": \"" + phone + "\",");
         jsonBody.append("\"userStatus\": " + userStatus);
         jsonBody.append("}");
-
+        */
         // Realizar o Teste
         given()                                                      // Dado que
                 .contentType("application/json")                  // o Tipo de Conteúdo
