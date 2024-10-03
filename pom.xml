@@ -67,6 +67,18 @@
             <version>2.10.1</version> <!-- ou a versão mais recente -->
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.25.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-edge-driver</artifactId>
+            <version>4.24.0</version> <!-- Use a versão mais recente -->
+        </dependency>
 
 
     </dependencies>
