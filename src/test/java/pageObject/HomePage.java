@@ -5,31 +5,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage extends BasePage{
+import java.time.Duration;
+
+public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public By byLocal(String local) {
+    private By byLocal(String local) {
         return By.cssSelector("option[value=\"" + local + "\"]");
     }
 
     @FindBy(css = "input[value]")
-    WebElement btnFindFlights;
+    private WebElement btnFindFlights;
 
-    //public By byBtnFindFlights = By.cssSelector("input[value]");
-
-
-    public void selecionarOrigemDestino(String byOrigem, String byDestino) {
-        driver.findElement(byLocal(byOrigem)).click();
-        driver.findElement(byLocal(byDestino)).click();
+    // Seleção da Origem e do Destino
+    public void selecionarOrigemDestino(String origem, String destino) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(byLocal(origem))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(byLocal(destino))).click();
     }
 
+    // Clicar no botão Find
     public void clicarBtnFindFlights() {
-        btnFindFlights.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(btnFindFlights)).click();
     }
 
     public void acessarHomePage() {

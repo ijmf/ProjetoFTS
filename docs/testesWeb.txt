@@ -43,6 +43,25 @@ Cucumber
 
 Page Objects / Page Factory
 - Automação de teste robusta, que simplique a manutenção e ampliação do teste
--
+- Programação Orientado a Objetos
+- Permite que criemos o mapeamento dos elementos separados dos scripts de automação
+- Podemos usar com ou sem as especificações em Gherkin
+
+Exemplos:
+sem Gherkin
+- Um arquivo de mapeamento para cada página ou seção repetida entre página (cabeçalho/ rodapé / menu)
+- um arquivo de automação do fluxo de teste, que pode usar o mapeamento de páginas diferentes
+
+Com Gherkin
+- Um arquivo de mapeamento para cada página ou seção repetida entre página (cabeçalho/ rodapé / menu)
+- um arquivo de especificação dizendo o fluxo desejado
+- um arquivo de passos que segue a especificação e usa o mapeamento.
+
+Formas de Automatizar:
+0 - Gravação de Script (1 arquivo)
+1 - Script simples (1 arquivo)
+2 - Cucumber (2 arquivos: feature e steps)
+3 - Page Object Simples (2 arquivos: mapeamento e scripts)
+4 - Page Object + Cucumber (3 arquivos: mapeamento, feature e steps)
 
 
