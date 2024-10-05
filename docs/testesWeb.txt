@@ -34,3 +34,15 @@ Há 3 formas de configurar/utilizar um driver:
 - Dowload Manual e instala dentro do projeto. (Bom: Portátil - Ruim: Manutenção)
 - Dowload manual e instala em uma pasta compartilhada. (Bom: Manutenção - Ruim: Portátil)
 - Gerenciador de download automático. (Bom: Manutenção + Portátil - Ruim: Usa Recursos)
+
+Cucumber
+- Framework para associar documentos de negócio (.feature) como arquivos de automação.
+- Plugins Gherkin e Cucumber
+- Permite que cremos especificações e critérios de aceite em Gherkin
+- Esse tipo de especificação é recomendado dentro da abordagem BDD (Desenvolvimento Direcionado por Comportamente)
+
+Page Objects / Page Factory
+- Automação de teste robusta, que simplique a manutenção e ampliação do teste
+-
+
+
