@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class Hooks {
 
     private static WebDriver driver; // Torna o driver estático para uso em toda a classe
+    private static ComprarPassagemPO comprarPassagemPO;
 
     // Construtor público sem argumentos
     public Hooks() {
@@ -24,6 +25,9 @@ public class Hooks {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
+        // Inicializa a instância de ComprarPassagemPO e set o driver
+        comprarPassagemPO = new ComprarPassagemPO();
+        comprarPassagemPO.setDriver(driver);
     }
 
     @After
@@ -31,5 +35,9 @@ public class Hooks {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 }

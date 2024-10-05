@@ -15,8 +15,13 @@ public class ComprarPassagemPO {
     private HomePage homePage;
     private FlightsPage flightsPage;
 
-    // Construtor
-    public ComprarPassagemPO(WebDriver driver) {
+    // Construtor público sem argumentos
+    public ComprarPassagemPO() {
+        // Este construtor pode ser deixado vazio ou pode ser usado para inicializações gerais
+    }
+
+    // Método para setar o driver (você pode chamar isso no seu Hook)
+    public void setDriver(WebDriver driver) {
         this.driver = driver;
         this.homePage = new HomePage(driver);
     }

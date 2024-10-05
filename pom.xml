@@ -108,6 +108,13 @@
             <version>7.19.0</version> <!-- ou a versão que você está usando -->
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version> <!-- Verifique a versão mais recente -->
+        </dependency>
+
+
 
 
     </dependencies>
