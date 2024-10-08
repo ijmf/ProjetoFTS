@@ -1,0 +1,41 @@
+Testes Mobile
+- Smartphones: Android ou iOS (IPhone) --> Celular Android
+- Smartwatches: relógios
+- Smartbands: pulseiras
+- SmartTV:
+- Tablets
+- Qualquer outros dispositivos que suporte Android ou iOS.
+
+Alvos:
+- Site responsivo - adapta aos formatos e resoluções das telas - WebDAV
+
+Aplicativos:
+- Nativos:  Android ou iOs (caro, praticamente dobrar o time, permite um ótimo app)
+- Hibrido:  1 código gera os 2 app (barato, um time só, apps mais padrão)
+
+Pré-Requisitos:
+- Android (linux): qualquer computador ou notebook Intel/AMD serve
+- Ios/Iphone: precisa ter um hardware Mac(apple) - testar Android e IOs
+- Memoria RAM:  >= 16gb
+- Placa de Vídeo offboard
+- Suporte a Virtualização
+- Espaço em Disco (1 Tb) --> SSD
+- SDKs (Kit de Desenvolvimento de Software, 1 para cada versão do SO
+- Imagens dos celulares (1 para cada modelo de celular)
+
+Executar os testes
+Dispositivos:
+-Físicos
+-Emulador
+
+Usamos o Sace Labs:
+- A maquina da maioria dos alunos não suportaria utilizar local.
+
+Roteiro do Automatizador Mobile:
+- Instalador do App Alvo (para estudo, podemos baixar apps do apkpure.com)
+- Precisamos instalar um APKInfo no aparelho ou emulador.
+- appPackage: com.saucelabs.mydemoapp.android
+- appActivity: com.saucelabs.mydemoapp.android.view.activities.splashActivity
+- Instalar o Appium Inspector e com ele inspecionar as telas e elementos
+- Gravar e exportar o código gerado na linguagem desejada
+- Importar e ajustar o código fonte para a execução com sucesso

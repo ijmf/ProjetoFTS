@@ -21,7 +21,7 @@ public class HomePage extends BasePage {
         return By.cssSelector("option[value=\"" + local + "\"]");
     }
 
-    @FindBy(css = "input[value]")
+    @FindBy(css = "input[value='Find Flights']") // Verifique se o seletor está correto
     private WebElement btnFindFlights;
 
     // Seleção da Origem e do Destino

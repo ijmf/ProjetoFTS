@@ -1,11 +1,15 @@
 package stepsPO;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import pageObject.FlightsPage;
 import pageObject.HomePage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,15 +19,12 @@ public class ComprarPassagemPO {
     private HomePage homePage;
     private FlightsPage flightsPage;
 
-    // Construtor público sem argumentos
-    public ComprarPassagemPO() {
-        // Este construtor pode ser deixado vazio ou pode ser usado para inicializações gerais
-    }
-
-    // Método para setar o driver (você pode chamar isso no seu Hook)
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-        this.homePage = new HomePage(driver);
+    @Before // Inicializa o WebDriver antes de cada cenário
+    public void setup() {
+        WebDriverManager.edgedriver().setup(); // Configure o WebDriver
+        driver = new EdgeDriver(); // Inicialize o EdgeDriver
+        driver.manage().window().maximize(); // Maximize a janela
+        homePage = new HomePage(driver); // Inicialize homePage aqui
     }
 
     @Given("que acesso a pagina inicial PO")
@@ -47,5 +48,12 @@ public class ComprarPassagemPO {
     public void exibe_pagina_de_voos_entre_e_disponiveis_po(String origem, String destino) {
         assertEquals("BlazeDemo - reserve", flightsPage.getTitle());
         assertEquals(String.format("Flights from %s to %s:", origem, destino), flightsPage.getFlightsHeader());
+    }
+
+    @After // Encerra o WebDriver após cada cenário
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

@@ -1,33 +1,19 @@
 package stepsPO;
 
-import io.cucumber.java.Before;
 import io.cucumber.java.After;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-
-import java.util.concurrent.TimeUnit;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Hooks {
-
-    private static WebDriver driver; // Torna o driver estático para uso em toda a classe
-    private static ComprarPassagemPO comprarPassagemPO;
-
-    // Construtor público sem argumentos
-    public Hooks() {
-        // Este construtor pode ser deixado vazio ou pode ser usado para inicializações gerais
-    }
+    private static WebDriver driver;
 
     @Before
     public void setUp() {
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-        // Inicializa a instância de ComprarPassagemPO e set o driver
-        comprarPassagemPO = new ComprarPassagemPO();
-        comprarPassagemPO.setDriver(driver);
     }
 
     @After
