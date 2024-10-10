@@ -64,4 +64,8 @@ Formas de Automatizar:
 3 - Page Object Simples (2 arquivos: mapeamento e scripts)
 4 - Page Object + Cucumber (3 arquivos: mapeamento, feature e steps)
 
+3 Desafios na Automação
+- Identificação de Seletores (nem sempre ID/Name, então vamos de CSS / Xpath)
+- Sincronismo (ajustar a velocidade entre script e software alvo)
+- "Programação Exótica": inovadora ou muito ruim.
 
